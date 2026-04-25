@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nilo Tex – Textiles & Más</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --indigo: #1a2e4a;
+    --gold: #c8973a;
+    --gold-light: #e8b75a;
+    --cream: #f5f0e8;
+    --warm-white: #faf7f2;
+    --text-dark: #1a1410;
+    --text-mid: #4a3f35;
+    --text-light: #8a7d72;
+    --accent-red: #c0392b;
+    --accent-teal: #1a7a6e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(13,27,42,0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    border-bottom: 1px solid rgba(200,151,58,0.3);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo .logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .nav-logo .logo-text {
+    display: flex; flex-direction: column; line-height: 1;
+  }
+  .nav-logo .logo-text span:first-child {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; color: #fff; letter-spacing: 3px;
+  }
+  .nav-logo .logo-text span:last-child {
+    font-size: 10px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold); transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy) !important;
+    padding: 9px 22px; border-radius: 4px;
+    font-weight: 600 !important; font-size: 12px !important;
+    transition: opacity 0.3s !important;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+  .nav-cta::after { display: none !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,151,58,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(26,122,110,0.1) 0%, transparent 50%),
+      linear-gradient(160deg, #0d1b2a 0%, #1a2e4a 100%);
+  }
+
+  /* Fabric texture overlay */
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px);
+  }
+
+  .hero-images {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+    opacity: 0.35;
+    mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 0%, transparent 90%);
+  }
+  .hero-images img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 80px 5%;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,151,58,0.15);
+    border: 1px solid rgba(200,151,58,0.4);
+    color: var(--gold-light); font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; padding: 7px 18px; border-radius: 50px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before { content: '✦'; font-size: 8px; }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 8vw, 100px);
+    font-weight: 700; line-height: 0.9;
+    color: #fff; margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--gold-light);
+  }
+  .hero-subtitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 6px; color: rgba(255,255,255,0.35);
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s 0.25s ease both;
+  }
+
+  .hero-desc {
+    font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.65);
+    max-width: 500px; margin-bottom: 44px;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); padding: 16px 36px; border-radius: 4px;
+    font-weight: 600; font-size: 14px; letter-spacing: 1px;
+    text-decoration: none; text-transform: uppercase;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 32px rgba(200,151,58,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,151,58,0.5); }
+
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.3); color: #fff;
+    padding: 16px 36px; border-radius: 4px;
+    font-size: 14px; letter-spacing: 1px; text-decoration: none;
+    text-transform: uppercase; transition: all 0.3s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
+
+  .hero-stats {
+    position: absolute; bottom: 48px; left: 5%;
+    display: flex; gap: 48px;
+    animation: fadeUp 0.8s 0.55s ease both;
+  }
+  .stat { text-align: left; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 700; color: var(--gold-light); line-height: 1;
+  }
+  .stat-label { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 4px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-header {
+    text-align: center; margin-bottom: 64px;
+  }
+  .section-tag {
+    display: inline-block; font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    border-bottom: 1px solid var(--gold); padding-bottom: 4px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+    color: var(--text-dark); line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc {
+    font-size: 15px; color: var(--text-light); max-width: 520px;
+    margin: 16px auto 0; line-height: 1.8;
+  }
+
+  /* ── SERVICIOS PRINCIPALES ── */
+  #servicios {
+    padding: 100px 5%;
+    background: var(--warm-white);
+  }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 1300px; margin: 0 auto;
+  }
+
+  .servicio-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    transition: transform 0.35s, box-shadow 0.35s;
+    cursor: pointer;
+  }
+  .servicio-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+  }
+
+  .servicio-img {
+    height: 200px; overflow: hidden; position: relative;
+  }
+  .servicio-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .servicio-card:hover .servicio-img img { transform: scale(1.08); }
+
+  .servicio-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,42,0.6) 0%, transparent 60%);
+  }
+
+  .servicio-tag {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--gold); color: var(--navy);
+    font-size: 9px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 2px;
+  }
+
+  .servicio-body {
+    padding: 24px;
+  }
+  .servicio-icon { font-size: 28px; margin-bottom: 12px; }
+  .servicio-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 700; margin-bottom: 8px;
+  }
+  .servicio-desc { font-size: 13px; color: var(--text-light); line-height: 1.7; }
+
+  /* ── TELAS ── */
+  #telas {
+    padding: 100px 5%;
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  #telas::before {
+    content: 'TEXTILES';
+    position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif; font-size: 220px;
+    color: rgba(255,255,255,0.025); letter-spacing: 10px;
+    pointer-events: none;
+  }
+  #telas .section-title { color: #fff; }
+  #telas .section-tag { color: var(--gold-light); border-color: var(--gold-light); }
+  #telas .section-desc { color: rgba(255,255,255,0.5); }
+
+  .telas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 1300px; margin: 0 auto;
+  }
+
+  .tela-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .tela-card:hover {
+    background: rgba(200,151,58,0.15);
+    border-color: rgba(200,151,58,0.5);
+    transform: translateY(-4px);
+  }
+  .tela-img {
+    height: 130px; overflow: hidden;
+  }
+  .tela-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .tela-card:hover .tela-img img { transform: scale(1.1); }
+  .tela-info { padding: 14px; }
+  .tela-name {
+    font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px;
+  }
+  .tela-detail { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  /* ── SERIGRAFIA ── */
+  #serigrafia {
+    padding: 100px 5%;
+    background: var(--cream);
+  }
+
+  .serig-layout {
+    max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    align-items: center;
+  }
+
+  .serig-gallery {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .serig-gallery img {
+    width: 100%; border-radius: 8px;
+    aspect-ratio: 1; object-fit: cover;
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .serig-gallery img:hover { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+  .serig-gallery img:first-child {
+    grid-column: span 2; aspect-ratio: 16/9;
+  }
+
+  .serig-content { padding: 20px 0; }
+  .serig-content .section-header { text-align: left; margin-bottom: 32px; }
+  .serig-content .section-header .section-tag { margin-bottom: 12px; }
+
+  .insumos-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin-bottom: 32px;
+  }
+  .insumo-item {
+    background: #fff; border-radius: 8px;
+    padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.3s;
+  }
+  .insumo-item:hover { transform: translateX(4px); }
+  .insumo-item .insumo-icon { font-size: 22px; }
+  .insumo-item .insumo-text { }
+  .insumo-item .insumo-name { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+  .insumo-item .insumo-sub { font-size: 11px; color: var(--text-light); }
+
+  /* ── MAQUINAS ── */
+  #maquinas {
+    padding: 100px 5%;
+    background: var(--warm-white);
+  }
+
+  .maquinas-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    max-width: 1300px; margin: 0 auto;
+  }
+
+  .maquina-section {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+  .maquina-header {
+    background: var(--navy); padding: 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .maquina-header-icon { font-size: 32px; }
+  .maquina-header-info {}
+  .maquina-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 700; color: #fff;
+  }
+  .maquina-header p { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+
+  .maquina-img { height: 180px; overflow: hidden; }
+  .maquina-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .maquina-body { padding: 20px; }
+  .accesorios-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .acc-tag {
+    background: var(--cream); color: var(--text-mid);
+    font-size: 11px; padding: 5px 12px; border-radius: 50px;
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: all 0.2s;
+  }
+  .acc-tag:hover {
+    background: var(--gold); color: var(--navy);
+    border-color: var(--gold);
+  }
+
+  /* ── DTF ── */
+  #dtf {
+    padding: 100px 5%;
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a3a 100%);
+    position: relative; overflow: hidden;
+  }
+  #dtf::before {
+    content: 'DTF';
+    position: absolute; left: -2%; bottom: -8%;
+    font-family: 'Bebas Neue', sans-serif; font-size: 400px;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none; line-height: 1;
+  }
+
+  .dtf-layout {
+    max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .dtf-content .section-header { text-align: left; margin-bottom: 32px; }
+  .dtf-content .section-title { color: #fff; }
+  .dtf-content .section-tag { color: var(--gold-light); border-color: var(--gold-light); }
+  .dtf-content .section-desc { color: rgba(255,255,255,0.55); text-align: left; max-width: 420px; margin-left: 0; }
+
+  .dtf-features {
+    display: flex; flex-direction: column; gap: 16px;
+    margin-bottom: 36px;
+  }
+  .dtf-feature {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 16px;
+    transition: all 0.3s;
+  }
+  .dtf-feature:hover {
+    background: rgba(200,151,58,0.1);
+    border-color: rgba(200,151,58,0.3);
+  }
+  .dtf-feature-icon { font-size: 24px; flex-shrink: 0; }
+  .dtf-feature-text h4 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .dtf-feature-text p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+  .dtf-gallery {
+    display: grid; grid-template-rows: 1fr 1fr; gap: 12px; height: 500px;
+  }
+  .dtf-gallery img {
+    width: 100%; height: 100%; object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s;
+  }
+  .dtf-gallery img:hover { transform: scale(1.02); }
+  .dtf-gallery-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+
+  /* ── POR QUE NOSOTROS ── */
+  #porque {
+    padding: 100px 5%;
+    background: var(--cream);
+  }
+
+  .porque-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 32px; max-width: 1300px; margin: 0 auto;
+  }
+  .porque-item {
+    text-align: center; padding: 40px 24px;
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    transition: transform 0.3s;
+  }
+  .porque-item:hover { transform: translateY(-6px); }
+  .porque-emoji { font-size: 48px; margin-bottom: 20px; display: block; }
+  .porque-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark);
+  }
+  .porque-desc { font-size: 13px; color: var(--text-light); line-height: 1.8; }
+
+  /* ── GALERIA ── */
+  #galeria {
+    padding: 100px 5%;
+    background: var(--warm-white);
+  }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 12px;
+    max-width: 1300px; margin: 0 auto;
+  }
+  .galeria-item {
+    overflow: hidden; border-radius: 8px; cursor: pointer;
+    position: relative;
+  }
+  .galeria-item:first-child {
+    grid-column: span 2; grid-row: span 2;
+  }
+  .galeria-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    min-height: 200px;
+    transition: transform 0.5s;
+  }
+  .galeria-item:first-child img { min-height: 400px; }
+  .galeria-item:hover img { transform: scale(1.08); }
+  .galeria-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,42,0.7) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 20px;
+  }
+  .galeria-item:hover .galeria-overlay { opacity: 1; }
+  .galeria-overlay span { color: #fff; font-size: 13px; font-weight: 500; }
+
+  /* ── CONTACTO STRIP ── */
+  #contacto {
+    padding: 80px 5%;
+    background: var(--navy);
+  }
+  .contacto-layout {
+    max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    align-items: center;
+  }
+  .contacto-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px); font-weight: 700;
+    color: #fff; line-height: 1.1; margin-bottom: 16px;
+  }
+  .contacto-left h2 em { font-style: italic; color: var(--gold-light); }
+  .contacto-left p { color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.8; }
+
+  .contacto-cards {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .contacto-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 18px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .contacto-card:hover {
+    background: rgba(200,151,58,0.12);
+    border-color: rgba(200,151,58,0.4);
+    transform: translateX(6px);
+  }
+  .contacto-card-icon { font-size: 28px; }
+  .contacto-card-info h4 { font-size: 13px; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .contacto-card-info p { font-size: 15px; color: #fff; font-weight: 500; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080f18;
+    padding: 48px 5% 32px;
+    border-top: 1px solid rgba(200,151,58,0.15);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+    max-width: 1300px; margin: 0 auto 48px;
+  }
+  .footer-brand {}
+  .footer-brand .logo-text span:first-child {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; color: #fff; letter-spacing: 4px;
+    display: block;
+  }
+  .footer-brand .logo-text span:last-child {
+    font-size: 10px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase;
+    display: block; margin-bottom: 16px;
+  }
+  .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.8; max-width: 240px; }
+  .footer-col h4 {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1300px; margin: 0 auto;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .serig-layout, .dtf-layout, .contacto-layout { grid-template-columns: 1fr; }
+    .maquinas-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; }
+    .galeria-item:first-child { grid-column: span 2; }
+    .hero-images { display: none; }
+  }
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .maquinas-grid { grid-template-columns: 1fr; }
+    .insumos-list { grid-template-columns: 1fr; }
+  }
+
+  /* Floating WhatsApp */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 99;
+    background: #25D366; border-radius: 50%;
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 28px;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+    animation: waPulse 2s infinite;
+  }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  }
+
+  /* Scroll indicator */
+  .scroll-line {
+    position: absolute; bottom: 0; left: 5%;
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollLine 2s infinite;
+  }
+  @keyframes scrollLine {
+    0% { height: 0; opacity: 0; }
+    50% { height: 80px; opacity: 1; }
+    100% { height: 0; opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🧵</div>
+    <div class="logo-text">
+      <span>NILO TEX</span>
+      <span>Textiles & Más</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#telas">Telas</a></li>
+    <li><a href="#serigrafia">Serigrafía</a></li>
+    <li><a href="#maquinas">Máquinas</a></li>
+    <li><a href="#dtf">DTF</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto" class="nav-cta">Contáctanos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Collage of fabric images using Unsplash -->
+  <div class="hero-images">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Telas coloridas">
+    <img src="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?w=600&q=80" alt="Textil">
+    <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80" alt="Telas">
+    <img src="https://images.unsplash.com/photo-1586495777744-4e6232bf8d8f?w=600&q=80" alt="Costura">
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Tacna, Perú · Desde el Corazón del Textil</div>
+    <h1 class="hero-title"><em>Nilo</em><br>Tex</h1>
+    <div class="hero-subtitle">Textiles & Más</div>
+    <p class="hero-desc">
+      Todo lo que necesitas para crear, confeccionar e imprimir. Telas de alta calidad, insumos para serigrafía, accesorios para tu máquina e impresión DTF profesional — en un solo lugar.
+    </p>
+    <div class="hero-btns">
+      <a href="#servicios" class="btn-primary">Ver Catálogo</a>
+      <a href="#contacto" class="btn-secondary">Contáctanos</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Tipos de Tela</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Años de Exp.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Posibilidades</div>
+    </div>
+  </div>
+
+  <div class="scroll-line"></div>
+</section>
+
+<!-- SERVICIOS PRINCIPALES -->
+<section id="servicios">
+  <div class="section-header">
+    <div class="section-tag">Nuestros Servicios</div>
+    <h2 class="section-title">Todo lo que <em>necesitas</em></h2>
+    <p class="section-desc">Desde telas hasta accesorios, pasando por serigrafía e impresión DTF — somos tu proveedor textil completo en Tacna.</p>
+  </div>
+
+  <div class="servicios-grid" style="max-width:1300px;margin:0 auto;">
+    <div class="servicio-card">
+      <div class="servicio-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Telas">
+        <div class="servicio-img-overlay"></div>
+        <div class="servicio-tag">Destacado</div>
+      </div>
+      <div class="servicio-body">
+        <div class="servicio-icon">🧶</div>
+        <h3 class="servicio-title">Venta de Telas</h3>
+        <p class="servicio-desc">Amplio catálogo de telas nacionales e importadas: algodón, polyester, seda, lycra, drill, gabardina, jean, fleece, y muchas más.</p>
+      </div>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-img">
+        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=700&q=80" alt="Serigrafia">
+        <div class="servicio-img-overlay"></div>
+        <div class="servicio-tag">Popular</div>
+      </div>
+      <div class="servicio-body">
+        <div class="servicio-icon">🎨</div>
+        <h3 class="servicio-title">Insumos Serigrafía</h3>
+        <p class="servicio-desc">Todo para tu taller serigráfico: tintas, bastidores, emulsiones, espátulas, mallas, removedores y mucho más.</p>
+      </div>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-img">
+        <img src="https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?w=700&q=80" alt="Maquina coser">
+        <div class="servicio-img-overlay"></div>
+      </div>
+      <div class="servicio-body">
+        <div class="servicio-icon">⚙️</div>
+        <h3 class="servicio-title">Accesorios de Máquina</h3>
+        <p class="servicio-desc">Accesorios para máquina recta, remalle, recubridor y otras. Agujas, prensatelas, bobinas, hilos, correas y repuestos.</p>
+      </div>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-img">
+        <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=700&q=80" alt="Impresion DTF">
+        <div class="servicio-img-overlay"></div>
+        <div class="servicio-tag">Nuevo</div>
+      </div>
+      <div class="servicio-body">
+        <div class="servicio-icon">🖨️</div>
+        <h3 class="servicio-title">Impresión DTF</h3>
+        <p class="servicio-desc">Impresión directa en film para transferencia a cualquier tela. Alta definición, colores vibrantes, durabilidad garantizada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TELAS -->
+<section id="telas">
+  <div class="section-header">
+    <div class="section-tag">Catálogo</div>
+    <h2 class="section-title" style="color:#fff;">Gran Variedad de <em>Telas</em></h2>
+    <p class="section-desc">Más de 500 tipos de tela disponibles en múltiples colores, grosores y tramas. Para moda, hogar, industria y más.</p>
+  </div>
+
+  <div class="telas-grid">
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=70" alt="Algodón"></div>
+      <div class="tela-info"><div class="tela-name">Algodón</div><div class="tela-detail">100% natural · varios pesos</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?w=400&q=70" alt="Polyester"></div>
+      <div class="tela-info"><div class="tela-name">Polyester</div><div class="tela-detail">Resistente · fácil cuidado</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?w=400&q=70" alt="Lycra"></div>
+      <div class="tela-info"><div class="tela-name">Lycra / Spandex</div><div class="tela-detail">Alta elasticidad · deportes</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&q=70" alt="Jean"></div>
+      <div class="tela-info"><div class="tela-name">Jean / Denim</div><div class="tela-detail">Clásico · varios colores</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1584998043560-18f6c62d60d3?w=400&q=70" alt="Seda"></div>
+      <div class="tela-info"><div class="tela-name">Seda / Satén</div><div class="tela-detail">Elegante · suave al tacto</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1586495777744-4e6232bf8d8f?w=400&q=70" alt="Gabardina"></div>
+      <div class="tela-info"><div class="tela-name">Gabardina</div><div class="tela-detail">Resistente · formal</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&q=70" alt="Drill"></div>
+      <div class="tela-info"><div class="tela-name">Drill</div><div class="tela-detail">Industrial · uniformes</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1619468129361-605ebea04b44?w=400&q=70" alt="Fleece"></div>
+      <div class="tela-info"><div class="tela-name">Fleece / Polar</div><div class="tela-detail">Abrigador · suave</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1599499685914-ece5df8ab27a?w=400&q=70" alt="Lino"></div>
+      <div class="tela-info"><div class="tela-name">Lino</div><div class="tela-detail">Natural · artesanal</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400&q=70" alt="Terciopelo"></div>
+      <div class="tela-info"><div class="tela-name">Terciopelo</div><div class="tela-detail">Lujoso · decorativo</div></div>
+    </div>
+    <div class="tela-card">
+      <div class="tela-img"><img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=400&q=70" alt="Organza"></div>
+      <div class="tela-info"><div class="tela-name">Organza / Tul</div><div class="tela-detail">Festivo · fiestas</div></div>
+    </div>
+    <div class="tela-card" style="background:rgba(200,151,58,0.2);border-color:rgba(200,151,58,0.5);">
+      <div class="tela-img" style="background:linear-gradient(135deg,rgba(200,151,58,0.3),rgba(200,151,58,0.1));display:flex;align-items:center;justify-content:center;font-size:48px;">+</div>
+      <div class="tela-info"><div class="tela-name" style="color:var(--gold-light);">Y mucho más</div><div class="tela-detail">Consulta disponibilidad</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERIGRAFIA -->
+<section id="serigrafia">
+  <div class="serig-layout">
+    <div class="serig-gallery">
+      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=900&q=80" alt="Serigrafía proceso">
+      <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&q=80" alt="Tintas serigrafía">
+      <img src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?w=500&q=80" alt="Bastidor">
+    </div>
+
+    <div class="serig-content">
+      <div class="section-header">
+        <div class="section-tag">Serigrafía</div>
+        <h2 class="section-title">Insumos para <em>Estampar</em></h2>
+        <p class="section-desc" style="text-align:left;margin-left:0;">Todo lo que tu taller de serigrafía necesita para producir con calidad y eficiencia.</p>
+      </div>
+
+      <div class="insumos-list">
+        <div class="insumo-item">
+          <div class="insumo-icon">🎨</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Tintas al agua y plastisol</div>
+            <div class="insumo-sub">Colores sólidos y especiales</div>
+          </div>
+        </div>
+        <div class="insumo-item">
+          <div class="insumo-icon">🔲</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Bastidores / Marcos</div>
+            <div class="insumo-sub">Aluminio y madera, varios tamaños</div>
+          </div>
+        </div>
+        <div class="insumo-item">
+          <div class="insumo-icon">🕸️</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Mallas serigráficas</div>
+            <div class="insumo-sub">32 a 160 hilos</div>
+          </div>
+        </div>
+        <div class="insumo-item">
+          <div class="insumo-icon">💊</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Emulsión fotosensible</div>
+            <div class="insumo-sub">Para diferentes condiciones</div>
+          </div>
+        </div>
+        <div class="insumo-item">
+          <div class="insumo-icon">🧪</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Diluyentes y removedores</div>
+            <div class="insumo-sub">Limpieza y mantenimiento</div>
+          </div>
+        </div>
+        <div class="insumo-item">
+          <div class="insumo-icon">🔧</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Espátulas y racletas</div>
+            <div class="insumo-sub">Diferentes durezas</div>
+          </div>
+        </div>
+        <div class="insumo-item">
+          <div class="insumo-icon">💡</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Lámparas de exposición</div>
+            <div class="insumo-sub">UV y halógenas</div>
+          </div>
+        </div>
+        <div class="insumo-item">
+          <div class="insumo-icon">📦</div>
+          <div class="insumo-text">
+            <div class="insumo-name">Film positivo y papel kraft</div>
+            <div class="insumo-sub">Complementos esenciales</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#contacto" class="btn-primary" style="display:inline-block;">Ver catálogo completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAQUINAS -->
+<section id="maquinas">
+  <div class="section-header">
+    <div class="section-tag">Accesorios</div>
+    <h2 class="section-title">Para tu <em>Máquina</em> de Coser</h2>
+    <p class="section-desc">Repuestos, accesorios y consumibles para todo tipo de máquina de confección industrial y doméstica.</p>
+  </div>
+
+  <div class="maquinas-grid">
+    <!-- Recta -->
+    <div class="maquina-section">
+      <div class="maquina-header">
+        <div class="maquina-header-icon">🔩</div>
+        <div class="maquina-header-info">
+          <h3>Máquina Recta</h3>
+          <p>Industrial & Doméstica</p>
+        </div>
+      </div>
+      <div class="maquina-img">
+        <img src="https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?w=600&q=80" alt="Máquina recta">
+      </div>
+      <div class="maquina-body">
+        <div class="accesorios-tags">
+          <span class="acc-tag">Agujas Organ</span>
+          <span class="acc-tag">Prensatelas</span>
+          <span class="acc-tag">Bobinas</span>
+          <span class="acc-tag">Porta-bobinas</span>
+          <span class="acc-tag">Hilos industriales</span>
+          <span class="acc-tag">Planchas de aguja</span>
+          <span class="acc-tag">Correas</span>
+          <span class="acc-tag">Garfios</span>
+          <span class="acc-tag">Pies de costura</span>
+          <span class="acc-tag">Aceite lubricante</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Remalle -->
+    <div class="maquina-section">
+      <div class="maquina-header">
+        <div class="maquina-header-icon">🪡</div>
+        <div class="maquina-header-info">
+          <h3>Remalle / Overlock</h3>
+          <p>3 y 5 hilos</p>
+        </div>
+      </div>
+      <div class="maquina-img">
+        <img src="https://images.unsplash.com/photo-1619468129361-605ebea04b44?w=600&q=80" alt="Remalle">
+      </div>
+      <div class="maquina-body">
+        <div class="accesorios-tags">
+          <span class="acc-tag">Agujas especiales</span>
+          <span class="acc-tag">Cuchillas</span>
+          <span class="acc-tag">Tensores</span>
+          <span class="acc-tag">Guías de hilo</span>
+          <span class="acc-tag">Hilos overlock</span>
+          <span class="acc-tag">Prensatelas remalle</span>
+          <span class="acc-tag">Correas síncronas</span>
+          <span class="acc-tag">Planchas diferencial</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recubre -->
+    <div class="maquina-section">
+      <div class="maquina-header">
+        <div class="maquina-header-icon">⚡</div>
+        <div class="maquina-header-info">
+          <h3>Recubridor / Flatlock</h3>
+          <p>Costura de cubierta</p>
+        </div>
+      </div>
+      <div class="maquina-img">
+        <img src="https://images.unsplash.com/photo-1520942702018-0862200e6873?w=600&q=80" alt="Recubridor">
+      </div>
+      <div class="maquina-body">
+        <div class="accesorios-tags">
+          <span class="acc-tag">Agujas recubridora</span>
+          <span class="acc-tag">Hilo spandex</span>
+          <span class="acc-tag">Pies recubre</span>
+          <span class="acc-tag">Guías elástico</span>
+          <span class="acc-tag">Tensores superiores</span>
+          <span class="acc-tag">Porta-conos</span>
+          <span class="acc-tag">Roldanas</span>
+          <span class="acc-tag">Lubricantes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Otros accesorios generales -->
+  <div style="max-width:1300px;margin:48px auto 0;background:#fff;border-radius:16px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;">
+      <div>
+        <div class="section-tag" style="margin-bottom:8px;">También tenemos</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;">Accesorios Generales de Costura</h3>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;">
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">📏 Cintas métricas</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">✂️ Tijeras profesionales</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">📌 Alfileres y agujas mano</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🔵 Botones variados</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🤐 Cierres / Zippers</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🪢 Elásticos y encajes</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🪡 Hilos en todos los colores</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">📐 Patrones y reglas de corte</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🧲 Imanes para patrones</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🔮 Entretelas y fusibles</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🔷 Broche a presión</span>
+      <span class="acc-tag" style="font-size:13px;padding:8px 18px;">🪝 Ganchos y corchetes</span>
+    </div>
+  </div>
+</section>
+
+<!-- DTF -->
+<section id="dtf">
+  <div class="dtf-layout">
+    <div class="dtf-content">
+      <div class="section-header">
+        <div class="section-tag">Impresión</div>
+        <h2 class="section-title">DTF — Direct<br>to <em>Film</em></h2>
+        <p class="section-desc">La tecnología de impresión más versátil del mercado. Transfiere diseños increíbles a cualquier tipo de tela con resultados profesionales.</p>
+      </div>
+
+      <div class="dtf-features">
+        <div class="dtf-feature">
+          <div class="dtf-feature-icon">🎯</div>
+          <div class="dtf-feature-text">
+            <h4>Alta Definición</h4>
+            <p>Resolución de hasta 1440 dpi. Colores vibrantes, detalles nítidos y degradados suaves.</p>
+          </div>
+        </div>
+        <div class="dtf-feature">
+          <div class="dtf-feature-icon">👕</div>
+          <div class="dtf-feature-text">
+            <h4>Compatible con cualquier tela</h4>
+            <p>Algodón, polyester, nylon, cuero, jeans — funciona sobre cualquier superficie textil.</p>
+          </div>
+        </div>
+        <div class="dtf-feature">
+          <div class="dtf-feature-icon">💪</div>
+          <div class="dtf-feature-text">
+            <h4>Durabilidad garantizada</h4>
+            <p>Resistente al lavado, al roce y al tiempo. Sin grietas ni decoloración.</p>
+          </div>
+        </div>
+        <div class="dtf-feature">
+          <div class="dtf-feature-icon">📦</div>
+          <div class="dtf-feature-text">
+            <h4>Sin mínimos de cantidad</h4>
+            <p>Desde 1 unidad hasta pedidos industriales. Precio justo por cantidad.</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="#contacto" class="btn-primary" style="display:inline-block;">Cotizar impresión DTF</a>
+    </div>
+
+    <div class="dtf-gallery">
+      <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&q=80" alt="DTF impresión" style="border-radius:10px;height:240px;">
+      <div class="dtf-gallery-row">
+        <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&q=80" alt="Camiseta estampada">
+        <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=500&q=80" alt="Estampado colorido">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ NOSOTROS -->
+<section id="porque">
+  <div class="section-header">
+    <div class="section-tag">Nuestra Diferencia</div>
+    <h2 class="section-title">¿Por qué <em>Nilo Tex</em>?</h2>
+    <p class="section-desc">Más de una década siendo el aliado de confeccionistas, artistas y emprendedores textiles en Tacna.</p>
+  </div>
+
+  <div class="porque-grid">
+    <div class="porque-item">
+      <span class="porque-emoji">🏆</span>
+      <h3 class="porque-title">Calidad Garantizada</h3>
+      <p class="porque-desc">Todos nuestros productos son seleccionados con estrictos controles de calidad. Lo mejor para tus creaciones.</p>
+    </div>
+    <div class="porque-item">
+      <span class="porque-emoji">💰</span>
+      <h3 class="porque-title">Precios Competitivos</h3>
+      <p class="porque-desc">Trabajamos directo con fabricantes para ofrecerte los mejores precios del mercado, sin intermediarios.</p>
+    </div>
+    <div class="porque-item">
+      <span class="porque-emoji">📦</span>
+      <h3 class="porque-title">Stock Permanente</h3>
+      <p class="porque-desc">Amplio inventario disponible todo el año. No esperas, no demoras. Lo que necesitas, cuando lo necesitas.</p>
+    </div>
+    <div class="porque-item">
+      <span class="porque-emoji">🤝</span>
+      <h3 class="porque-title">Asesoría Experta</h3>
+      <p class="porque-desc">Nuestro equipo conoce el negocio textil. Te asesoramos para elegir el material ideal para cada proyecto.</p>
+    </div>
+    <div class="porque-item">
+      <span class="porque-emoji">🚀</span>
+      <h3 class="porque-title">Atención Rápida</h3>
+      <p class="porque-desc">Respuesta inmediata por WhatsApp y atención presencial en tienda. Tu tiempo vale.</p>
+    </div>
+    <div class="porque-item">
+      <span class="porque-emoji">🌈</span>
+      <h3 class="porque-title">Todo en Un Lugar</h3>
+      <p class="porque-desc">Telas, serigrafía, accesorios de máquina e impresión DTF. Un solo proveedor para todo tu negocio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="section-header">
+    <div class="section-tag">Inspiración</div>
+    <h2 class="section-title">Galería de <em>Productos</em></h2>
+    <p class="section-desc">Una muestra de lo que encontrarás en nuestra tienda.</p>
+  </div>
+
+  <div class="galeria-grid">
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80" alt="Telas coloridas">
+      <div class="galeria-overlay"><span>Colección de Telas</span></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80" alt="Denim">
+      <div class="galeria-overlay"><span>Jean & Denim</span></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="Serigrafía">
+      <div class="galeria-overlay"><span>Serigrafía</span></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?w=600&q=80" alt="Máquina de coser">
+      <div class="galeria-overlay"><span>Accesorios</span></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600&q=80" alt="DTF">
+      <div class="galeria-overlay"><span>Impresión DTF</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contacto-layout">
+    <div class="contacto-left">
+      <h2>Visítanos o<br><em>escríbenos</em></h2>
+      <p>Estamos en el corazón de Tacna, listos para atenderte. Consulta precios, disponibilidad y cotizaciones sin compromiso.</p>
+
+      <div style="margin-top:32px;padding:20px;background:rgba(200,151,58,0.1);border:1px solid rgba(200,151,58,0.3);border-radius:12px;">
+        <div style="color:var(--gold-light);font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">Horario de Atención</div>
+        <div style="color:#fff;font-size:14px;line-height:2;">
+          Lunes – Sábado: 8:00am – 7:00pm<br>
+          Domingo: 9:00am – 1:00pm
+        </div>
+      </div>
+    </div>
+
+    <div class="contacto-cards">
+      <a href="https://wa.me/51918198771" class="contacto-card">
+        <div class="contacto-card-icon">📱</div>
+        <div class="contacto-card-info">
+          <h4>WhatsApp</h4>
+          <p>+51 918 198 771</p>
+        </div>
+      </a>
+      <a href="tel:+51918198771" class="contacto-card">
+        <div class="contacto-card-icon">📞</div>
+        <div class="contacto-card-info">
+          <h4>Teléfono / Llamada</h4>
+          <p>+51 918 198 771</p>
+        </div>
+      </a>
+      <a href="mailto:nilotex@gmail.com" class="contacto-card">
+        <div class="contacto-card-icon">📧</div>
+        <div class="contacto-card-info">
+          <h4>Email</h4>
+          <p>nilotex@gmail.com</p>
+        </div>
+      </a>
+      <a href="#" class="contacto-card">
+        <div class="contacto-card-icon">📍</div>
+        <div class="contacto-card-info">
+          <h4>Dirección</h4>
+          <p>Tacna, Perú — Consultar ubicación</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-text">
+        <span>NILO TEX</span>
+        <span>Textiles & Más — Tacna, Perú</span>
+      </div>
+      <p>Tu proveedor textil de confianza. Telas, insumos para serigrafía, accesorios de máquina e impresión DTF profesional.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#telas">Venta de Telas</a></li>
+        <li><a href="#serigrafia">Insumos Serigrafía</a></li>
+        <li><a href="#maquinas">Accesorios Máquina</a></li>
+        <li><a href="#dtf">Impresión DTF</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Telas</h4>
+      <ul>
+        <li><a href="#">Algodón</a></li>
+        <li><a href="#">Polyester</a></li>
+        <li><a href="#">Jean / Denim</a></li>
+        <li><a href="#">Lycra / Spandex</a></li>
+        <li><a href="#">Gabardina</a></li>
+        <li><a href="#">Y muchas más…</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">📍 Tacna, Perú</a></li>
+        <li><a href="tel:+51 918 198 771">📞 +51 918 198 771</a></li>
+        <li><a href="https://wa.me/51918198771">💬 WhatsApp</a></li>
+        <li><a href="mailto:script2006bc@gmail.com">📧 nilotex@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Nilo Tex — Todos los derechos reservados.</p>
+    <p style="color:rgba(200,151,58,0.4);">Textiles de calidad · Tacna, Perú 🇵🇪</p>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/51918198771" class="wa-float" title="Chatea por WhatsApp">💬</a>
+
+<script>
+  // Smooth scroll active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.style.color = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.color = 'var(--gold-light)';
+      }
+    });
+  });
+
+  // Intersection observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.servicio-card, .tela-card, .porque-item, .maquina-section, .dtf-feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
